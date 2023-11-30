@@ -1,0 +1,19 @@
+version: '3.5'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sfa-mservice-mail
+    environment:
+      - AMQP_URL=${AMQP_URL}
+      - MAIL_HOST=${MAIL_HOST}
+      - MAIL_USER=${MAIL_USER}
+      - MAIL_PASS=${MAIL_PASS}
+      - MAIL_FROM=${MAIL_FROM}
+      - SMS_ACCOUNT_SID=${SMS_ACCOUNT_SID}
+      - SMS_AUTH_TOKEN=${SMS_AUTH_TOKEN}
+      - SMS_MESSAGING_SERVICE_SID=${SMS_MESSAGING_SERVICE_SID}
+    volumes:
+      - ./src:/app/src

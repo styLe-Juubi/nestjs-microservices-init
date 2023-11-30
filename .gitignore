@@ -1,0 +1,11 @@
+/api-gateway/dist
+/api-gateway/node_modules
+/api-gateway/.env
+
+/mservice-mail/dist
+/mservice-mail/node_modules
+/mservice-mail/.env
+
+/mservice-users/dist
+/mservice-users/node_modules
+/mservice-users/.env

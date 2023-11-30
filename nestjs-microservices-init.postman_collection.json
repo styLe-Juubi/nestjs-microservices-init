@@ -1,0 +1,930 @@
+{
+	"info": {
+		"_postman_id": "62d1b566-b333-4647-9f1f-a12e581d58d2",
+		"name": "nestjs-microservices-init",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30126389"
+	},
+	"item": [
+		{
+			"name": "seed",
+			"item": [
+				{
+					"name": "execute seed",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{version}}/seed",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{version}}",
+								"seed"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "users",
+					"item": [
+						{
+							"name": "sign up / phone",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"token\", JSON.parse(responseBody).token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"register_type\": \"phone\",\r\n    \"phone\": 6691438664,\r\n    \"country_code\": 52,\r\n    \"username\": \"Juubi Phone\",\r\n    \"password\": \"#TestPass.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/{{version}}/auth/sign-up",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{version}}",
+										"auth",
+										"sign-up"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "sign up / email",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"token\", JSON.parse(responseBody).token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"register_type\": \"email\",\r\n    \"email\": \"erickcincoa@gmail.com\",\r\n    \"username\": \"Erick Cinco\",\r\n    \"password\": \"#TestPass.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/{{version}}/auth/sign-up",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{version}}",
+										"auth",
+										"sign-up"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "sign in / phone",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"token\", JSON.parse(responseBody).token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"phone\": 6691438664,\r\n    \"password\": \"#TestPass.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/{{version}}/auth/sign-in",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{version}}",
+										"auth",
+										"sign-in"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "sign in / email",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"token\", JSON.parse(responseBody).token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"erickcincoa@gmail.com\",\r\n    \"password\": \"#TestPass.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/{{version}}/auth/sign-in",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{version}}",
+										"auth",
+										"sign-in"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "resend code / login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"code\": \"XYLB4\",\r\n    \"type\": \"two-step-login\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/{{version}}/auth/resend-code",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{version}}",
+										"auth",
+										"resend-code"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "two step auth / login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"code\": \"8X4K3\",\r\n    \"type\": \"two-step-login\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/{{version}}/auth/two-step-auth",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{version}}",
+										"auth",
+										"two-step-auth"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "forgot password",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"vjuubi@gmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/{{version}}/auth/forgot-password",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{version}}",
+										"auth",
+										"forgot-password"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "verify code",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"code\": \"Q121V\",\r\n    \"type\": \"forgot-password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/{{version}}/auth/verify-code",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{version}}",
+										"auth",
+										"verify-code"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "new password",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"code\": \"2ZFZ2\",\r\n    \"password\": \"#TestPass.\",\r\n    \"repeatPassword\": \"#TestPass.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/{{version}}/auth/new-password",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{version}}",
+										"auth",
+										"new-password"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "check status",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/{{version}}/auth/check-status",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{version}}",
+										"auth",
+										"check-status"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "string"
+							}
+						]
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "customers",
+					"item": [
+						{
+							"name": "sign up",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"juubi.animeet@gmail.com\",\r\n    \"password\": \"#TestPass.\",\r\n    \"username\": \"Juubi Animeet Customer\",\r\n    \"name\": \"Juubi\",\r\n    \"surname\": \"Animeet\",\r\n    \"country_code\": 52,\r\n    \"phone\": 6691438663\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/{{version}}/auth/customer/sign-up",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"{{version}}",
+										"auth",
+										"customer",
+										"sign-up"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "create w/ phone",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"register_type\": \"phone\",\r\n    \"country_code\": 52,\r\n    \"phone\": 6691438664\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/{{version}}/user",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{version}}",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create w/ email",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"register_type\": \"email\",\r\n    \"email\": \"vjuubi@gmail.com\",\r\n    \"username\": \"vjuubi\",\r\n    \"password\": \"#TestPass.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/{{version}}/user",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{version}}",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find all",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"register_type\": \"phone\",\r\n    \"phone\": 6691438665,\r\n    \"country_code\": 52,\r\n    \"username\": \"Diabla\",\r\n    \"password\": \"#TestPass.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/{{version}}/user?page=1&limit=10&order[sort]=-1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{version}}",
+								"user"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "order[sort]",
+									"value": "-1"
+								},
+								{
+									"key": "username",
+									"value": "Juubi",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "Erick",
+									"disabled": true
+								},
+								{
+									"key": "surname",
+									"value": "Cinco",
+									"disabled": true
+								},
+								{
+									"key": "online",
+									"value": "true",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "juu",
+									"disabled": true
+								},
+								{
+									"key": "phone",
+									"value": "6691438666",
+									"disabled": true
+								},
+								{
+									"key": "roles",
+									"value": "user",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find one",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"register_type\": \"phone\",\r\n    \"phone\": 6691438665,\r\n    \"country_code\": 52,\r\n    \"username\": \"Diabla\",\r\n    \"password\": \"#TestPass.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/{{version}}/user/:userId",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{version}}",
+								"user",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "64e22d2ed79232e1cb2839f4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find by username",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"register_type\": \"phone\",\r\n    \"phone\": 6691438665,\r\n    \"country_code\": 52,\r\n    \"username\": \"Diabla\",\r\n    \"password\": \"#TestPass.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/{{version}}/user/username/:username",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{version}}",
+								"user",
+								"username",
+								":username"
+							],
+							"variable": [
+								{
+									"key": "username",
+									"value": "erickcincoaa"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verify account",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{version}}/user/verify/verify-account?code=YT5ZC&type=verify-account",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{version}}",
+								"user",
+								"verify",
+								"verify-account"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "YT5ZC"
+								},
+								{
+									"key": "type",
+									"value": "verify-account"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Erick",
+									"type": "text"
+								},
+								{
+									"key": "surname",
+									"value": "Cinco Ayon",
+									"type": "text"
+								},
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/A:/Images/2.gif",
+									"disabled": true
+								},
+								{
+									"key": "background",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								},
+								{
+									"key": "phone",
+									"value": "6691438664",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "country_code",
+									"value": "52",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/{{version}}/user/:userId",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{version}}",
+								"user",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "64f57579df453eba7d776d3d"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"register_type\": \"phone\",\r\n    \"phone\": 6691438665,\r\n    \"country_code\": 52,\r\n    \"username\": \"Diabla\",\r\n    \"password\": \"#TestPass.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/{{version}}/user/:userId",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{version}}",
+								"user",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "64c50d43b2638e0b31369e05"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove all files from",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"register_type\": \"phone\",\r\n    \"phone\": 6691438665,\r\n    \"country_code\": 52,\r\n    \"username\": \"Diabla\",\r\n    \"password\": \"#TestPass.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/{{version}}/user/remove-all-files-from/:type/:userId",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{version}}",
+								"user",
+								"remove-all-files-from",
+								":type",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "type",
+									"value": "background"
+								},
+								{
+									"key": "userId",
+									"value": "64e22d2ed79232e1cb2839f4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove file from",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"register_type\": \"phone\",\r\n    \"phone\": 6691438665,\r\n    \"country_code\": 52,\r\n    \"username\": \"Diabla\",\r\n    \"password\": \"#TestPass.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/{{version}}/user/remove-file-from/:type/:userId/:filename",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{version}}",
+								"user",
+								"remove-file-from",
+								":type",
+								":userId",
+								":filename"
+							],
+							"variable": [
+								{
+									"key": "type",
+									"value": "background"
+								},
+								{
+									"key": "userId",
+									"value": "64e22d2ed79232e1cb2839f4"
+								},
+								{
+									"key": "filename",
+									"value": "81be88ca-11e1-4eba-bab4-de0ff287628d-2023-08-20.jpg"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	]
+}
